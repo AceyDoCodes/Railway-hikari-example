@@ -4,7 +4,13 @@ import os
 import hikari
 import lightbulb
 
-bot = lightbulb.BotApp(token = os.environ["DISCORD_TOKEN"], prefix = "!" intents = hikari.Intents.MESSAGE_CONTENT)
+intents = (
+    hikari.Intents.MESSAGE_CONTENT |
+    hikari.Intents.DM_MESSAGES |
+    hikari.Intents.GUILD_MESSAGES
+)
+
+bot = lightbulb.BotApp(token = os.environ["DISCORD_TOKEN"], prefix = "!", intents = intents)
 
 @bot.listen(hikari.StartedEvent)
 async def on_ready(event):
